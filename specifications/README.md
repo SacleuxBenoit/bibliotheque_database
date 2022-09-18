@@ -245,38 +245,6 @@ Attention : l'accès à la BDD doit être effectué via un unique utilisateur ay
 Vous pouvez utiliser les composants d'accès au données de votre choix : PHP vanila, Doctrine (Symfony) ou Eloquent (Laravel) par exemple.
 Mais vous êtes vivement encouragé à utiliser Doctrine.
 
-## Livrables
-
-Le code doit être livré sous la forme d'un repository git en ligne sur un site comme github, gitlab ou autre.
-
-Vous avez deux options : soit vous utilisez les composants d'accès aux données d'un framework PHP soit vous n'utilisez aucun framework PHP.
-
-Quelque soit votre choix, le repository doit contenir les fichiers suivants :
-
-- un fichier `README.md` (voir ci-dessous)
-- un ou des fichiers PHP contenant des requêtes qui utilisent des composants d'accès aux données
-
-Le fichier `README.md` doit indiquer la procédure à suivre pour :
-
-- si nécessaire, installer les dépendances (avec composer par exemple)
-- lancer le serveur web
-- montrer l'URL à ouvrir pour tester les requêtes d'accès aux données
-
-Attention : en fonction de vos données de test, il se peut que certaines requêtes ne renvoient aucunes données.
-Dans ce cas, ne vous inquiétez pas.
-Ce qui est évalué, c'est le fonctionnement correct des requêtes, pas la présence ou l'absence de résultats.
-
-## Prérequis
-
-- MariaDB
-- PHPMyAdmin
-- la BDD du projet bibliothèque
-
-Si vous utilisez Symfony :
-
-- PHP 7.x ou 8.x
-- composer
-
 ## Les requêtes
 
 ### Les utilisateurs
