@@ -2,6 +2,9 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
+
+use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -9,10 +12,12 @@ use Symfony\Component\Routing\Annotation\Route;
 class DbTestController extends AbstractController
 {
     #[Route('/db/test', name: 'app_db_test')]
-    public function index(): Response
+    public function index(ManagerRegistry $doctrine): Response
     {
-        return $this->render('db_test/index.html.twig', [
-            'controller_name' => 'DbTestController',
-        ]);
+        $repository = $doctrine->getRepository(User::class);
+        $user = $repository->findAll();
+        dump($user);
+
+        exit();
     }
 }
