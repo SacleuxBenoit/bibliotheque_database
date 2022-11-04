@@ -2,12 +2,13 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\Auteur;
+use App\Entity\User;
 use App\Entity\Emprunteur;
 use DateTimeImmutable;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 
-use App\Entity\User;
 
 class TestFixtures extends Fixture
 {
@@ -108,6 +109,35 @@ class TestFixtures extends Fixture
             $emprunteur->setUpdatedAt($emprunteurData['updated_at']);
 
             $manager->persist($emprunteur);
+        }
+    }
+
+    public function loadAuteur(ObjectManager $manager):void {
+        $auteurDatas = [
+            [
+                'nom' => 'auteur inconnu',
+                'prenom' => '',
+            ],
+            [
+                'nom' => 'Cartier ',
+                'prenom' => 'Hugues',
+            ],
+              [
+                'nom' => 'Lambert',
+                'prenom' => 'Armand',
+            ],
+            [
+                'nom' => 'Moitessier',
+                'prenom' => 'Thomas',
+            ],
+        ];
+
+        foreach ($auteurDatas as $auteurData) {
+            $auteur = new Auteur();
+            $auteur->setNom($auteurData['nom']);
+            $auteur->setPrenom($auteurData['prenom']);
+
+            $manager->persist($auteur);
         }
     }
 }
