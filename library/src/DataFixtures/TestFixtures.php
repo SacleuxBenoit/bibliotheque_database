@@ -2,17 +2,23 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\Livre;
 use App\Entity\Genre;
 use App\Entity\Auteur;
 use App\Entity\User;
 use App\Entity\Emprunteur;
 use DateTimeImmutable;
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\Persistence\ObjectManager;
 
 
 class TestFixtures extends Fixture
 {
+    public function __construct(ManagerRegistry $doctrine)
+    {
+        $this->doctrine = $doctrine;
+    }
     public function load(ObjectManager $manager): void
     {
         // $product = new Product();
@@ -20,6 +26,7 @@ class TestFixtures extends Fixture
         $this->loadUser($manager);
         $this->loadEmprunteur($manager);
         $this->loadGenre($manager);
+        $this->loadLivre($manager);
 
         $manager->flush();
     }
@@ -143,8 +150,7 @@ class TestFixtures extends Fixture
         }
     }
 
-    public function loadGenre(ObjectManager $manager): void
-    {
+    public function loadGenre(ObjectManager $manager): void{
         $genreDatas =
             [
                 [
@@ -210,5 +216,44 @@ class TestFixtures extends Fixture
         }
 
         $manager->flush();
+    }
+    public function loadLivre(ObjectManager $manager): void{
+
+        $livreDatas = [
+            [
+                'titre' => 'Lorem ipsum dolor sit amet',
+                'anne_edition' => 2010,
+                'nombre_pages' => 100,
+                'code_isbn' => '9785786930024',
+            ],
+            [
+                'titre' => 'Consectetur adipiscing elit',
+                'anne_edition' => 2011,
+                'nombre_pages' => 150,
+                'code_isbn' => '9783817260935',
+            ],
+            [
+                'titre' => 'Mihi quidem Antiochum',
+                'anne_edition' => 2012,
+                'nombre_pages' => 200,
+                'code_isbn' => '9782020493727',
+            ],
+            [
+                'titre' => 'Quem audis satis belle ',
+                'anne_edition' => 2013,
+                'nombre_pages' => 250,
+                'code_isbn' => '9794059561353',
+            ],
+        ];
+
+        foreach ($livreDatas as $livreData) {
+            $livre = new Livre();
+            $livre->setTitre($livreData['titre']);
+            $livre->setAnneeEdition($livreData['anne_edition']);
+            $livre->setNombresPages($livreData['nombre_pages']);
+            $livre->setCodeIsbn($livreData['code_isbn']);
+
+            $manager->persist($livre);
+        }
     }
 }
